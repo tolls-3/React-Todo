@@ -1,7 +1,6 @@
 import React from "react";
 import ToDoList from "./components/TodoComponents/TodoList";
-import ToDoForm from './components/TodoComponents/TodoForm';
-
+import ToDoForm from "./components/TodoComponents/TodoForm";
 
 const initialToDoData = [
   {
@@ -51,32 +50,50 @@ class App extends React.Component {
     console.log("Test:", id);
     this.setState({
       initialToDoData: this.state.initialToDoData.map(item => {
-        if (item.id !== id){
+        if (item.id !== id) {
           return item;
-        } else{
-          return {...item, done: !item.done}
+        } else {
+          return { ...item, done: !item.done };
         }
       })
-    })
-
+    });
   };
 
   clearTask = e => {
     e.preventDefault();
     this.setState({
-      initialToDoData: this.state.initialToDoData.filter(
-        item => {
-          return !item.done
-        }
-      )
+      initialToDoData: this.state.initialToDoData.filter(item => {
+        return !item.done;
+      })
+    });
+  };
+
+  addToDo = (e, taskName) => {
+    e.preventDefault();
+      const newTask = {
+        id: Date.now(),
+        name: taskName,
+        done: false
+      };
+      this.setState({
+        initialToDoData: [...this.state.initialToDoData, newTask]
+      });
+    
+  };
+
+  clearList = () => {
+    this.setState({
+      initialToDoData: []
     })
   }
+
+  
 
   render() {
     return (
       <div>
         <h2>Welcome to your Todo App!</h2>
-        <ToDoForm/>
+        <ToDoForm clearList={this.clearList} addToDo={this.addToDo}/>
         <div>
           <ToDoList
             toDo={this.state.initialToDoData}

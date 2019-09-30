@@ -1,8 +1,8 @@
 import React from "react";
 
 class ToDoForm extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state={
         taskName: ""
     };
@@ -15,7 +15,12 @@ class ToDoForm extends React.Component {
       console.log(this.state.taskName)
   }
 
+  submitHandler = e =>{
+      this.props.addToDo(e, this.state.taskName)
+      this.setState({taskName:''})
+  }
 
+ 
 
   render() {
     return (
@@ -26,7 +31,8 @@ class ToDoForm extends React.Component {
         value={this.state.taskName}
         onChange={this.changeHandler}
         />
-        <button>Add Task</button>
+        <button onClick={this.submitHandler}>Add Task</button>
+        <button onClick={this.props.clearList}>Clear All Task</button>
       </div>
     );
   }
