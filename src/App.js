@@ -1,5 +1,7 @@
 import React from "react";
 import ToDoList from "./components/TodoComponents/TodoList";
+import ToDoForm from './components/TodoComponents/TodoForm';
+
 
 const initialToDoData = [
   {
@@ -18,12 +20,12 @@ const initialToDoData = [
     done: false
   },
   {
-    name: "Repair car",
+    name: "Fix car",
     id: 1234,
     done: false
   },
   {
-    name: "Prepare invoice",
+    name: "Prepare revised invoice",
     id: 12345,
     done: false
   },
@@ -59,14 +61,27 @@ class App extends React.Component {
 
   };
 
+  clearTask = e => {
+    e.preventDefault();
+    this.setState({
+      initialToDoData: this.state.initialToDoData.filter(
+        item => {
+          return !item.done
+        }
+      )
+    })
+  }
+
   render() {
     return (
       <div>
         <h2>Welcome to your Todo App!</h2>
+        <ToDoForm/>
         <div>
           <ToDoList
             toDo={this.state.initialToDoData}
             markToDo={this.markToDo}
+            clearTask={this.clearTask}
           />
         </div>
       </div>

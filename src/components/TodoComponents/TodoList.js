@@ -5,7 +5,7 @@ import React from "react";
 import ToDo from "./Todo";
 
 const ToDoList = props => {
-  //console.log(props);
+//console.log(props);
   return (
     <div>
       {props.toDo.map(item => (
@@ -15,7 +15,7 @@ const ToDoList = props => {
         markToDo = {props.markToDo}
         />
       ))}
-      <button>Clear Task</button>
+      <button onClick={props.clearTask}>Clear Task</button>
     </div>
   );
 };
