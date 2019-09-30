@@ -46,17 +46,27 @@ class App extends React.Component {
   }
 
   markToDo = id => {
-    console.log("Test:", id)
-  }
+    console.log("Test:", id);
+    this.setState({
+      initialToDoData: this.state.initialToDoData.map(item => {
+        if (item.id !== id){
+          return item;
+        } else{
+          return {...item, done: !item.done}
+        }
+      })
+    })
+
+  };
 
   render() {
     return (
       <div>
         <h2>Welcome to your Todo App!</h2>
         <div>
-          <ToDoList 
-          toDo={this.state.initialToDoData}
-          markToDo={this.markToDo}
+          <ToDoList
+            toDo={this.state.initialToDoData}
+            markToDo={this.markToDo}
           />
         </div>
       </div>
