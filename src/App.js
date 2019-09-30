@@ -47,7 +47,7 @@ class App extends React.Component {
   }
 
   markToDo = id => {
-    console.log("Test:", id);
+    //console.log("Test:", id);
     this.setState({
       initialToDoData: this.state.initialToDoData.map(item => {
         if (item.id !== id) {
@@ -70,30 +70,27 @@ class App extends React.Component {
 
   addToDo = (e, taskName) => {
     e.preventDefault();
-      const newTask = {
-        id: Date.now(),
-        name: taskName,
-        done: false
-      };
-      this.setState({
-        initialToDoData: [...this.state.initialToDoData, newTask]
-      });
-    
+    const newTask = {
+      id: Date.now(),
+      name: taskName,
+      done: false
+    };
+    this.setState({
+      initialToDoData: [...this.state.initialToDoData, newTask]
+    });
   };
 
   clearList = () => {
     this.setState({
       initialToDoData: []
-    })
-  }
-
-  
+    });
+  };
 
   render() {
     return (
       <div>
         <h2>Welcome to your Todo App!</h2>
-        <ToDoForm clearList={this.clearList} addToDo={this.addToDo}/>
+        <ToDoForm clearList={this.clearList} addToDo={this.addToDo} />
         <div>
           <ToDoList
             toDo={this.state.initialToDoData}
